@@ -1,10 +1,14 @@
 # Requirements Review — Follow-Up Item Lifecycle
 
-## Review goal
+## Review Goal
 
-Check whether the current product documents provide one consistent and testable definition of the lifecycle before dynamic testing.
+Check whether the current product documents provide one consistent and testable definition for the lifecycle scope selected for this case study.
 
-## Sources reviewed
+## Current Scope
+
+**Create → Active State → Reminder → Reschedule → Mark Paid → Complete (Done/Lost) → Archive → Reopen**
+
+## Sources Reviewed
 
 - Product Constitution
 - Scope v1
@@ -12,39 +16,39 @@ Check whether the current product documents provide one consistent and testable 
 - Domain Model
 - State Machine
 - API Contracts
-- Testing Strategy and Quality Gates
+- current executable create/lifecycle contract where supporting evidence was needed
 
 ## Findings
 
-| ID | Type | Evidence | QA concern | Clarification / action |
+| ID | Type | Evidence | QA concern | Testing decision / clarification needed |
 |---|---|---|---|---|
-| RQ-01 | Contradiction | Product Constitution and User Flow describe closing a case as “paid/done/lost”. Domain Model and State Machine explicitly state that `paid` is a separate payment state and does not close a case. | Two different expected results exist for the same business action. | Treat Domain Model / State Machine as current authority for testing, and correct the high-level product wording to separate “mark paid” from “close done/lost”. |
-| RQ-02 | Inconsistent activation definition | Product Constitution defines activation through reminder return **and close/reschedule**. User Flows activation path ends at first reminder-driven return. | Product analytics and acceptance can classify the same user differently. | Define one authoritative activation event sequence. |
-| RQ-03 | Incomplete user flow | Create flow lists type, due date, client, note and optional amount. The API create contract also requires `title`. | A manual test based only on the user flow can omit a field required by the implementation contract. | Add `title` to the authoritative creation flow or explicitly define it as derived. |
-| RQ-04 | Ambiguous acceptance threshold | UX acceptance says a new user should create the first item in “under 2–3 minutes”. | There is no single pass/fail threshold: <2 min and <3 min are different criteria. | Replace the range with one measurable maximum and define test conditions. |
-| RQ-05 | Documentation drift | Testing Strategy requires integration coverage for “billing webhook verification”. API Contracts state that real payment-provider checkout/webhook semantics are intentionally outside the current contract. | Quality gate may require testing functionality that the current product explicitly says is not implemented. | Align the testing strategy with the current beta billing scope. |
+| RQ-01 | Contradiction | High-level product/user-flow wording describes closing a case as `paid/done/lost`. Domain Model and State Machine define payment and lifecycle as separate axes and explicitly state that `paid` does not close a case. | The same business action has conflicting expected behaviour in different documents. | Use the current Domain Model / State Machine as the lifecycle oracle. Record the documentation contradiction; do not treat `paid` as a terminal lifecycle state. |
+| RQ-02 | Incomplete user flow | The create user flow lists type, due date, client, note and optional amount. The executable create contract requires `title`, `client_name`, type and `due_at`. | A tester following only the product flow can omit a field required by the current product contract. | Clarify whether `title` is explicitly user-entered, derived, or missing from the flow documentation. Until clarified, test the current UI behaviour but keep the documentation gap visible. |
+| RQ-03 | Missing recovery requirement | State Machine defines `archived` as hidden/inactive and explicitly forbids Reopen from `archived`. No reviewed product document defines how a user recovers a case archived by mistake or later needed again. | The current forbidden transition is testable, but the intended product recovery path is undefined. | Test the documented rule: Reopen from `archived` must be rejected. Track the missing recovery path as a requirements/product decision rather than inventing one in QA. |
+| RQ-04 | Incomplete payment applicability rule | State Machine says Mark Paid is allowed only when payment is applicable, but the reviewed product documentation does not define which item types are payment-applicable. Current implementation maps `invoice` and `renewal` to `unpaid` and other types to `not_applicable`. | The expected initial payment state and valid Mark Paid scenarios cannot be derived completely from product documentation alone. | Product documentation should define the item-type-to-payment-applicability mapping. Until then, distinguish documented behaviour from implementation observation in test evidence. |
 
-## Requirements that are sufficiently testable
+## Requirements That Are Sufficiently Testable
 
-The lifecycle/state-machine document gives clear expected results for:
+The current lifecycle/state-machine documentation gives clear expected results for:
 
-- temporal projection of active state;
-- allowed/forbidden terminal transitions;
-- rescheduling active cases;
+- temporal projection of active status;
+- creating an active case and initial reminder;
+- active-only rescheduling;
 - payment/lifecycle separation;
-- required outcome reason;
-- reopening done/lost cases;
-- archiving;
-- reminder cancellation/re-arming side effects;
-- ownership enforced server-side.
+- completion as `done` or `lost`;
+- required completion reason;
+- completion reminder cancellation and `next_action` clearing;
+- reopening `done` and `lost`;
+- reopen reminder re-arming;
+- archive behaviour;
+- forbidden lifecycle transitions, including Reopen from `archived`.
 
-## Open questions before full certification
+## Out-of-Scope Review Findings
 
-1. Which activation definition is authoritative?
-2. What is the exact first-item creation time SLA?
-3. Should high-level “close as paid” language be removed everywhere?
-4. Is webhook verification intentionally deferred or still part of a release gate?
+Earlier review notes about activation analytics, the “under 2–3 minutes” UX acceptance wording and billing webhook quality gates are valid documentation topics, but they are outside this lifecycle test cycle and are not carried as blockers for this case study.
 
-## QA conclusion
+## QA Conclusion
 
-The lifecycle itself is mostly well specified in the domain/state-machine documents, but the surrounding product documentation contains enough drift that testing should not rely on one document in isolation.
+Most of the selected lifecycle has a usable test oracle and can proceed to Test Design.
+
+Where the requirement is incomplete or contradictory, QA records the gap and avoids inventing the business rule. A documentation finding blocks only the affected expected result, not unrelated lifecycle testing.

@@ -1,101 +1,70 @@
-# Static Review Findings
+# Static Review Findings — Follow-Up Item Lifecycle
 
-This file separates confirmed specification inconsistencies from runtime defect candidates.
+This file separates specification findings from implementation defect candidates for the current lifecycle scope.
 
-## SR-01 — “Paid” described as a close outcome in high-level flow
+## SR-01 — “Paid” described as a close outcome
 
 **Type:** specification contradiction  
-**Severity estimate:** High for requirement clarity
+**Related requirement finding:** RQ-01  
+**Priority:** High
 
-### Evidence
+High-level product/user-flow wording describes closing a case as `paid/done/lost`, while the Domain Model and State Machine explicitly define payment and lifecycle as independent axes.
 
-High-level product/user-flow wording describes closing a case as `paid/done/lost`.
-
-The current Domain Model and State Machine explicitly define:
-
-- payment and lifecycle as independent axes;
-- `paid` is not a lifecycle status;
-- marking paid does not close a case.
-
-### Risk
-
-Different developers/testers can implement or verify different expected behavior.
-
-### QA action
-
-Use the state-machine/domain-model semantics as the current test oracle and request correction of the high-level wording.
+**QA handling:** use the State Machine / Domain Model as the current lifecycle oracle and keep the documentation contradiction visible.
 
 ---
 
-## SR-02 — Activation definition differs between documents
-
-**Type:** specification inconsistency  
-**Severity estimate:** Medium
-
-Product Constitution requires reminder return plus close/reschedule for activation. User Flows lists activation as complete at first reminder-driven return.
-
-### Risk
-
-Activation analytics, acceptance and product experiments can use incompatible definitions.
-
-### QA action
-
-Choose one authoritative activation milestone sequence.
-
----
-
-## SR-03 — Create flow omits a field required by the API contract
+## SR-02 — Create flow omits required `title`
 
 **Type:** incomplete requirement / traceability gap  
-**Severity estimate:** Medium
+**Related requirement finding:** RQ-02  
+**Priority:** Medium
 
-The user-flow creation step lists type, due date, client, note and optional amount.
+The user-flow creation step does not mention `title`, while the current executable create schema requires it.
 
-The implemented create schema requires `title` and `client_name` plus type and due date.
-
-### Risk
-
-A tester following only the flow document can design an incomplete happy path.
-
-### QA action
-
-Update the product flow or explicitly document how title is produced.
+**QA handling:** do not silently rewrite the user flow. Test the current UI behaviour and keep the missing requirement visible.
 
 ---
 
-## SR-04 — “Under 2–3 minutes” is not one acceptance threshold
+## SR-03 — Archive recovery behaviour is undefined
 
-**Type:** ambiguous / weakly measurable acceptance criterion  
-**Severity estimate:** Low-Medium
+**Type:** incomplete requirement / product-flow gap  
+**Related requirement finding:** RQ-03  
+**Priority:** Medium
 
-### Risk
+The authoritative State Machine says:
 
-A 2:30 result can be both pass and fail depending on interpretation.
+- archive is allowed from any non-archived state;
+- archived cases are hidden/inactive;
+- Reopen is allowed only from `done` or `lost`;
+- Reopen from `archived` is forbidden.
 
-### QA action
+No reviewed product document defines a recovery path for an accidentally archived or later-needed case.
 
-Define one maximum time and test conditions.
-
----
-
-## SR-05 — Billing webhook quality-gate drift
-
-**Type:** documentation drift  
-**Severity estimate:** Medium
-
-Testing Strategy requires integration testing of billing webhook verification, while current API Contracts explicitly keep real provider checkout/webhook semantics outside the implemented beta contract.
-
-### Risk
-
-Release gate and implemented scope disagree.
-
-### QA action
-
-Remove/defer the stale gate or add an authoritative requirement if webhook behavior is actually required.
+**QA handling:** test the current rule as written — Reopen from `archived` must fail — and keep the missing recovery path as a separate requirements finding.
 
 ---
 
-## SR-06 — Whitespace-only required strings may bypass validation
+## SR-04 — Payment applicability mapping is not documented
+
+**Type:** incomplete requirement  
+**Related requirement finding:** RQ-04  
+**Priority:** High
+
+The State Machine allows Mark Paid only when payment is applicable, but the reviewed product documents do not state which item types are payment-applicable.
+
+The current implementation maps:
+
+- `invoice`, `renewal` → `unpaid`;
+- other item types → `not_applicable`.
+
+This implementation observation does not replace the missing product requirement.
+
+**QA handling:** distinguish documentation-derived expected results from implementation observations until the mapping is clarified.
+
+---
+
+## SR-05 — Whitespace-only required strings may bypass validation
 
 **Type:** implementation defect candidate from static review  
 **Status:** Not dynamically reproduced yet
@@ -104,21 +73,17 @@ Remove/defer the stale gate or add an authoritative requirement if webhook behav
 
 `FollowUpItemCreate.title` and `client_name` use `Field(min_length=1)`.
 
-The service persists:
+The service later persists:
 
-- `payload.title.strip()`
-- `payload.client_name.strip()`
+- `payload.title.strip()`;
+- `payload.client_name.strip()`.
 
-There is no field validator shown for stripping/rejecting whitespace-only title/client before the minimum-length check.
-
-### Hypothesis
-
-A payload containing `"   "` can satisfy raw length validation, then be normalized to an empty string and persisted.
+A whitespace-only value may satisfy the raw length validation and then become an empty persisted string after normalization.
 
 ### Required confirmation
 
-Execute TC-12 against the running API and inspect both response and persisted row.
+Execute a dynamic negative test against the running product and inspect the observable result.
 
-### Why it is not called a confirmed bug yet
+### Classification rule
 
-The static path strongly suggests the problem, but this portfolio does not label a runtime failure as proven until it is reproduced.
+This remains a **defect candidate**, not a confirmed product bug, until runtime reproduction provides evidence.

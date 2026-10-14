@@ -48,6 +48,7 @@ That makes it a better employer-facing sample than an isolated form validation e
 
 - [Requirements review](requirements-review.md)
 - [Test approach](test-approach.md)
+- [Test analysis and conditions](test-analysis.md)
 - [Manual/API checklist](checklist.md)
 - [Detailed test cases](test-cases.md)
 - [Static review findings](static-review-findings.md)
@@ -60,8 +61,9 @@ That makes it a better employer-facing sample than an isolated form validation e
 - product documentation review;
 - contract/state-machine review;
 - requirements contradiction and ambiguity analysis;
+- lifecycle test-condition analysis;
 - risk analysis;
-- test design;
+- preliminary test design;
 - static implementation cross-check.
 
 ### Not claimed as completed yet
