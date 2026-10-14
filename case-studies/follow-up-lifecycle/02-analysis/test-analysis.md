@@ -31,8 +31,8 @@ Future-planned functionality explicitly marked as not implemented is excluded.
 | TCND-C01 | Create | A user can create a valid follow-up item and the item is persisted as a case. | P0 | Clear |
 | TCND-C02 | Create | Creation assigns an active lifecycle state according to `due_at` and the current UTC date. | P0 | Clear |
 | TCND-C03 | Create | Creation schedules the initial reminder in the same authoritative flow. | P0 | Clear |
-| TCND-C04 | Create | Required creation data is enforced consistently across the user flow and executable contract. | P0 | Clarification needed: user flow omits `title` |
-| TCND-C05 | Create / Payment | Initial payment state is correct for the selected item type. | P0 | Clarification needed: documentation does not define the item-type-to-payment-applicability mapping |
+| TCND-C04 | Create | Required creation fields exposed by the current product are validated before a case is created. | P0 | Clarification needed: user flow omits `title` |
+| TCND-C05 | Create / Payment | Initial payment state is correct for the selected item type. | P0 | Blocked pending product definition of item-type-to-payment applicability |
 | TCND-A01 | Active State | A case due after the current UTC date is represented as `open`. | P0 | Clear |
 | TCND-A02 | Active State | A case due on the current UTC date is represented as `due_today`. | P0 | Clear |
 | TCND-A03 | Active State | A case due before the current UTC date is represented as `overdue`. | P0 | Clear |
@@ -45,9 +45,9 @@ Future-planned functionality explicitly marked as not implemented is excluded.
 | TCND-S02 | Reschedule | Reschedule changes `due_at` and recomputes the active lifecycle state. | P0 | Clear |
 | TCND-S03 | Reschedule | Reschedule updates or recreates pending reminder coverage for the new due time. | P0 | Clear |
 | TCND-S04 | Reschedule | Reschedule is rejected for `done`, `lost` and `archived` cases without changing the case state. | P0 | Clear |
-| TCND-P01 | Mark Paid | Mark Paid is available only when payment is applicable and the case is mutable. | P0 | Applicability mapping needs clarification |
+| TCND-P01 | Mark Paid | Mark Paid is available only when payment is applicable and the case is mutable. | P0 | Rule clear; item-type applicability mapping unresolved |
 | TCND-P02 | Mark Paid | Mark Paid changes payment state without changing lifecycle state. | P0 | Clear |
-| TCND-P03 | Mark Paid | Mark Paid is rejected when payment is not applicable. | P0 | Clear rule; affected item types need clarification |
+| TCND-P03 | Mark Paid | Mark Paid is rejected when payment is not applicable. | P0 | Rule clear; item-type applicability mapping unresolved |
 | TCND-CM01 | Complete | An active case can be completed as `done`. | P0 | Clear |
 | TCND-CM02 | Complete | An active case can be completed as `lost`. | P0 | Clear |
 | TCND-CM03 | Complete | A non-empty outcome reason is required for both `done` and `lost`. | P0 | Clear |
@@ -68,7 +68,8 @@ Future-planned functionality explicitly marked as not implemented is excluded.
 ## Requirements Affecting Testability
 
 - **TCND-C04** — the user flow does not include `title`, while the executable create contract requires it.
-- **TCND-C05 / TCND-P01 / TCND-P03** — the documentation says payment may be applicable or not applicable, but does not define the item-type mapping.
+- **TCND-C05** — cannot receive a complete documentation-derived expected result until the product defines which item types are payment-applicable.
+- **TCND-P01 / TCND-P03** — the action rules are testable when the case already exposes `unpaid` or `not_applicable`, but the item-type mapping remains unresolved.
 - **TCND-AR05** — the current rule forbids reopening archived cases and is testable; the product documentation does not define a recovery path for accidental archive.
 
 Detailed requirement findings are maintained in [requirements-review.md](requirements-review.md).

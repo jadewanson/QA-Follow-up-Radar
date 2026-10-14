@@ -1,20 +1,57 @@
 # QA Case Study — Follow-Up Item Lifecycle
 
-## Purpose
+## System Under Test
 
-This case study demonstrates how I approach a product as a Junior QA Engineer: reading the specification, finding requirement gaps, identifying product risks, designing tests, separating evidence from assumptions, and planning execution.
+[Follow-Up Radar](https://github.com/jadewanson/Follow-Up-Radar)
 
-The system under test is [Follow-Up Radar](https://github.com/jadewanson/Follow-Up-Radar), a training product built as a narrow follow-up tracker for freelancers and micro-studios. Its documented core loop is:
+Follow-Up Radar is a training product used as the system under test for this manual QA case study.
 
-**Capture → Schedule → Remind → Act → Close**
+## Test Objective
 
-This case study focuses on the most central domain feature:
+Verify that a user can work with a follow-up case through its documented lifecycle and that the product preserves the expected lifecycle, payment and reminder behaviour at each supported transition.
 
-**Follow-up item lifecycle — Create → Active State → Reminder → Reschedule → Mark Paid → Complete (Done/Lost) → Archive → Reopen**
+## Scope
 
-## Test basis
+**Create → Active State → Reminder → Reschedule → Mark Paid → Complete (Done/Lost) → Archive → Reopen**
 
-The analysis uses the current product documentation and implementation snapshot, not invented product behavior:
+This is a coverage scope, not one mandatory linear path. Allowed and forbidden transitions are verified against the documented product rules.
+
+## Current Status
+
+| Activity | Status |
+|---|---|
+| Planning | Complete |
+| Requirements review | Complete |
+| Test analysis | Complete |
+| Test design | Complete |
+| Zephyr test implementation | Pending |
+| Manual execution | Pending |
+| Defect reporting | Pending |
+| Retest / regression | Pending |
+| Test completion report | Pending |
+
+## Project Artifacts
+
+### 01 — Planning
+
+- [Test Approach](01-planning/test-approach.md)
+
+### 02 — Analysis
+
+- [Requirements Review](02-analysis/requirements-review.md)
+- [Test Analysis](02-analysis/test-analysis.md)
+- [Implementation Observations](02-analysis/implementation-observations.md)
+
+### 03 — Design
+
+- [State Transition Matrix](03-design/state-transition-matrix.md)
+- [Manual Test Cases](03-design/test-cases.md)
+
+The current `test-cases.md` is the design source pending implementation in Zephyr. After the cases are entered into Zephyr, Zephyr becomes the source of truth for manual test cases and execution status.
+
+## Test Basis
+
+Primary product documentation:
 
 - `docs/01_product_constitution.md`
 - `docs/03_scope_v1.md`
@@ -23,76 +60,17 @@ The analysis uses the current product documentation and implementation snapshot,
 - `docs/06_state_machine.md`
 - `docs/08_api_contracts.md`
 - `docs/11_testing_strategy_and_quality_gates.md`
-- `backend/app/api/routes_items.py`
-- `backend/app/schemas/followup_item.py`
-- `backend/app/services/item_service.py`
-- existing backend tests for registry, lifecycle and outcome reasons
 
-## Why this feature
+Implementation may be reviewed as supporting evidence where the UI or documentation is insufficient to explain an observation. Implementation is not used to invent missing business requirements.
 
-The lifecycle crosses several QA surfaces at once:
+## Execution Model
 
-- requirements and state-machine analysis;
-- positive, negative and boundary testing;
-- API contracts;
-- authorization / ownership;
-- persistent state;
-- reminder side effects;
-- event history;
-- UI state;
-- regression risk.
+Testing is manual and UI-first.
 
-That makes it a better employer-facing sample than an isolated form validation exercise.
+Browser DevTools, manual API requests and read-only persisted-state checks may be used as supporting evidence when the UI does not expose enough information to verify a result. The current web UI does not expose Archive, so Archive coverage requires manual API execution.
 
-## Artifacts
+## Evidence Policy
 
-- [Requirements review](requirements-review.md)
-- [Test approach](test-approach.md)
-- [Test analysis and conditions](test-analysis.md)
-- [State transition matrix](state-transition-matrix.md)
-- [Manual/API checklist](checklist.md)
-- [Detailed test cases](test-cases.md)
-- [Static review findings](static-review-findings.md)
-- [Current test summary](test-summary.md)
+No runtime Pass / Fail claim is made before execution.
 
-## Current evidence status
-
-### Completed
-
-- product documentation review;
-- contract/state-machine review;
-- requirements contradiction and ambiguity analysis;
-- lifecycle test-condition analysis;
-- risk analysis;
-- manual test design with state-transition coverage;
-- static implementation cross-check.
-
-### Not claimed as completed yet
-
-- browser execution against a running build;
-- manual API execution where required;
-- direct PostgreSQL validation;
-- DevTools evidence;
-- runtime bug reproduction.
-
-Those are intentionally not marked as passed until they are actually executed.
-
-## Core rules extracted from the product
-
-- lifecycle states: `open`, `due_today`, `overdue`, `done`, `lost`, `archived`;
-- payment state is independent: `unpaid`, `paid`, `not_applicable`;
-- `paid` does **not** close the case;
-- active status is projected from `due_at` against current UTC date;
-- only active cases can be rescheduled;
-- completion requires `done` or `lost` plus a non-empty reason;
-- completion clears `next_action` and cancels pending reminders;
-- only `done` and `lost` can be reopened;
-- reopening re-arms reminder coverage;
-- archiving cancels pending reminders;
-- all item access is scoped to the authenticated owner.
-
-## QA principle used throughout
-
-A green test proves only that no failure was observed in that executed scenario. It does not prove that the feature is defect-free.
-
-The same evidence rule is used in the artifacts below: static findings, planned tests and executed evidence are kept separate.
+Requirements/documentation findings are kept separate from confirmed product defects. Static implementation observations remain candidates until reproduced against the running product.

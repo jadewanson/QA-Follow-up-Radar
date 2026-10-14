@@ -9,7 +9,7 @@
 - `lost`
 - `archived`
 
-## User-Triggered Operations
+## Lifecycle Operations
 
 | Current state | Reschedule | Mark Paid | Complete: Done | Complete: Lost | Archive | Reopen |
 |---|---|---|---|---|---|---|
@@ -26,7 +26,7 @@ Mark Paid is permitted only when the case is mutable and payment is applicable.
 
 A successful Mark Paid operation changes `payment_status` but does not change lifecycle status.
 
-The product documentation does not currently define the item-type-to-payment-applicability mapping. This remains tracked as a requirements finding.
+The product documentation does not currently define the item-type-to-payment-applicability mapping. TCND-C05 remains blocked pending clarification of that mapping.
 
 ## Temporal Projection
 
@@ -59,17 +59,17 @@ Terminal states are not replaced by temporal projection:
 
 ## Test Condition Coverage
 
-| Matrix area | Covered test conditions |
+| Matrix area | Test conditions |
 |---|---|
 | Active temporal projection | TCND-A01, TCND-A02, TCND-A03, TCND-A04 |
 | Reschedule transitions | TCND-S01, TCND-S02, TCND-S03, TCND-S04 |
-| Payment/lifecycle independence | TCND-C05, TCND-P01, TCND-P02, TCND-P03 |
+| Payment/lifecycle rules | TCND-P01, TCND-P02, TCND-P03; TCND-C05 blocked pending requirement clarification |
 | Completion transitions | TCND-CM01, TCND-CM02, TCND-CM03, TCND-CM04, TCND-CM05, TCND-CM06 |
 | Archive transitions | TCND-AR01, TCND-AR02, TCND-AR03, TCND-AR04, TCND-AR05 |
 | Reopen transitions | TCND-RO01, TCND-RO02, TCND-RO03, TCND-RO04, TCND-RO05 |
 
 ## Manual Execution Scope
 
-The transition coverage in this matrix is intended for manual execution through the product UI.
+The transition coverage is designed for manual execution.
 
-Supporting manual observations may use browser DevTools, API inspection or read-only persisted-state checks when the UI does not expose enough evidence to confirm the result.
+The web UI is the primary surface. Browser DevTools, manual API requests or read-only persisted-state checks may be used when the UI does not expose the required operation or enough evidence to confirm the result.

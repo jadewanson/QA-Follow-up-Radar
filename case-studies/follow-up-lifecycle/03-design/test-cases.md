@@ -15,7 +15,7 @@ Manual API checks may be used where the current web UI does not expose the requi
 **Priority:** P0  
 **Technique:** Positive testing, state transition  
 **Surface:** Web UI  
-**Covers:** TCND-C01, TCND-C02, TCND-C03, TCND-C05, TCND-A01, TCND-R01
+**Covers:** TCND-C01, TCND-C02, TCND-C03, TCND-A01, TCND-R01
 
 **Preconditions**
 - User is authenticated.
@@ -512,8 +512,8 @@ Manual API checks may be used where the current web UI does not expose the requi
 
 ## Design Notes
 
-- These cases are intended for manual execution and later registration in Zephyr.
+- These cases are intended for manual execution and are the current design source pending implementation in Zephyr.
 - Test results are not recorded in this file.
-- Each Zephyr execution must receive its own Pass / Fail / Blocked status and evidence.
+- After implementation, Zephyr becomes the source of truth for manual test cases and Pass / Fail / Blocked execution status.
 - Archive coverage uses manual API execution because the current web UI implementation does not expose an Archive action.
 - Requirement gaps remain tracked separately and are not silently converted into expected product behaviour.
