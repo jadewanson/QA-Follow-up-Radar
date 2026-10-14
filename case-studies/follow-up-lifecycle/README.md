@@ -2,15 +2,15 @@
 
 ## Purpose
 
-This case study demonstrates how I approach a real product as a Junior QA Engineer: reading the specification, finding requirement gaps, identifying product risks, designing tests, separating evidence from assumptions, and planning execution.
+This case study demonstrates how I approach a product as a Junior QA Engineer: reading the specification, finding requirement gaps, identifying product risks, designing tests, separating evidence from assumptions, and planning execution.
 
-The tested product is [Follow-Up Radar](https://github.com/jadewanson/Follow-Up-Radar), a narrow follow-up tracker for freelancers and micro-studios. Its documented core loop is:
+The system under test is [Follow-Up Radar](https://github.com/jadewanson/Follow-Up-Radar), a training product built as a narrow follow-up tracker for freelancers and micro-studios. Its documented core loop is:
 
 **Capture → Schedule → Remind → Act → Close**
 
 This case study focuses on the most central domain feature:
 
-**Follow-up item lifecycle — Create → Reschedule → Mark Paid / Complete → Reopen / Archive**
+**Follow-up item lifecycle — Create → Active State → Reminder → Reschedule → Mark Paid → Complete (Done/Lost) → Archive → Reopen**
 
 ## Test basis
 
@@ -47,7 +47,7 @@ That makes it a better employer-facing sample than an isolated form validation e
 ## Artifacts
 
 - [Requirements review](requirements-review.md)
-- [Risk-based test strategy](test-strategy.md)
+- [Test approach](test-approach.md)
 - [Manual/API checklist](checklist.md)
 - [Detailed test cases](test-cases.md)
 - [Static review findings](static-review-findings.md)
