@@ -16,6 +16,23 @@ The following lifecycle functionality is included:
 
 These are the product capabilities covered by the test cycle. They are not treated as one mandatory linear path: allowed transitions and restrictions are verified against the documented product rules.
 
+## Out of Scope
+
+This test cycle does not attempt to validate the whole Follow-Up Radar product.
+
+The following areas are outside the current scope:
+
+- authentication and account-management flows except where an authenticated user is required to execute lifecycle tests;
+- billing, plan limits, trials and payment-provider behaviour;
+- daily digest and message-template features;
+- Chrome extension capture behaviour;
+- load, stress and performance testing;
+- security or penetration testing beyond functional access restrictions encountered in the selected lifecycle;
+- a full browser, device or operating-system compatibility matrix;
+- automated unit, integration or end-to-end test implementation.
+
+If an out-of-scope area blocks or materially affects a lifecycle scenario, the dependency will be recorded in the execution evidence.
+
 ## Test Level
 
 The primary test level is **System Testing**.
@@ -114,6 +131,35 @@ Where documents disagree, the conflict will be recorded as a requirements findin
 QA will not redefine business behaviour in order to make a test pass or fail.
 
 A functional defect will be reported only when observed behaviour contradicts a sufficiently defined expected result.
+
+## Entry Criteria
+
+Dynamic test execution can start when:
+
+- the selected lifecycle test basis is available for review;
+- the current test build can be started in the agreed QA environment;
+- the web application is reachable;
+- required backend services and dependencies are available for the tested flow;
+- the tester can authenticate and create the test data needed for execution;
+- planned lifecycle tests are available in the test management system;
+- known environment limitations that could affect execution are documented.
+
+If an entry criterion is not met, the affected tests may be recorded as **Blocked** rather than forced to a pass/fail result.
+
+## Exit Criteria
+
+The test cycle can be closed when:
+
+- all planned P0 lifecycle tests have been executed or have a documented blocking reason;
+- remaining planned tests have an explicit execution status;
+- observed product defects are recorded with reproducible evidence;
+- requirements/documentation findings affecting the scope are recorded separately;
+- fixes delivered during the cycle have been retested where applicable;
+- targeted regression has been performed where a change could affect previously tested lifecycle behaviour;
+- unresolved defects, blocked tests and residual risks are clearly stated in the test completion report;
+- no unexecuted test is presented as passed.
+
+Meeting the exit criteria means the test cycle has enough evidence to conclude. It does not mean the product is defect-free or automatically ready for release.
 
 ## Defect Handling
 
