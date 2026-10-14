@@ -49,6 +49,7 @@ That makes it a better employer-facing sample than an isolated form validation e
 - [Requirements review](requirements-review.md)
 - [Test approach](test-approach.md)
 - [Test analysis and conditions](test-analysis.md)
+- [State transition matrix](state-transition-matrix.md)
 - [Manual/API checklist](checklist.md)
 - [Detailed test cases](test-cases.md)
 - [Static review findings](static-review-findings.md)
