@@ -1,9 +1,5 @@
 # Test Approach — Follow-Up Item Lifecycle
 
-## Context
-
-Follow-Up Radar is a training product used as the system under test. The QA work in this case study follows a professional manual testing process.
-
 ## Test Objective
 
 The goal of this test cycle is to verify that a user can work with a follow-up case through its documented lifecycle and that the application preserves the expected state and behaviour at each step.
@@ -56,7 +52,7 @@ Testing will be primarily:
 
 The main test execution will be performed through the web interface.
 
-Browser DevTools, API observations or read-only state checks may be used when they help investigate or confirm behaviour, but they are supporting tools rather than the main focus of this case study.
+Browser DevTools, API observations or read-only state checks may be used when they help investigate or confirm behaviour, but they are supporting tools rather than the main focus of this test cycle.
 
 No test automation is included in this test cycle.
 

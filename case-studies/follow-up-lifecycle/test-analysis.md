@@ -1,18 +1,12 @@
 # Test Analysis — Follow-Up Item Lifecycle
 
-## Purpose
-
-This document turns the approved lifecycle scope and current test basis into test conditions.
-
-A **test condition** describes **what must be checked**. It does not yet define detailed steps, concrete test data or a Zephyr test case.
-
 ## Analysis Scope
 
 **Create → Active State → Reminder → Reschedule → Mark Paid → Complete (Done/Lost) → Archive → Reopen**
 
 The sequence above is the coverage scope, not one mandatory valid state path. Allowed and forbidden transitions are derived from the current authoritative lifecycle rules.
 
-## Test Basis Used
+## Test Basis
 
 Primary product sources:
 
@@ -22,13 +16,13 @@ Primary product sources:
 - `docs/06_state_machine.md`
 - `docs/08_api_contracts.md`
 
-Implementation was reviewed only as supporting evidence where useful:
+Implementation reviewed as supporting evidence where relevant:
 
 - `backend/app/schemas/followup_item.py`
 - `backend/app/services/item_service.py`
 - `backend/app/contracts/enums.py`
 
-Future-planned functionality explicitly marked as not implemented is excluded from this analysis.
+Future-planned functionality explicitly marked as not implemented is excluded.
 
 ## Test Conditions
 
@@ -71,20 +65,16 @@ Future-planned functionality explicitly marked as not implemented is excluded fr
 | TCND-RO04 | Reopen | Reopen re-arms reminder coverage. | P0 | Clear |
 | TCND-RO05 | Reopen | Reopen is rejected from `open`, `due_today`, `overdue` and `archived`. | P0 | Clear |
 
-## Analysis Findings
+## Requirements Affecting Testability
 
-The detailed requirements findings are tracked in [requirements-review.md](requirements-review.md).
+- **TCND-C04** — the user flow does not include `title`, while the executable create contract requires it.
+- **TCND-C05 / TCND-P01 / TCND-P03** — the documentation says payment may be applicable or not applicable, but does not define the item-type mapping.
+- **TCND-AR05** — the current rule forbids reopening archived cases and is testable; the product documentation does not define a recovery path for accidental archive.
 
-The conditions that currently require clarification before they can have a fully documentation-derived expected result are:
+Detailed requirement findings are maintained in [requirements-review.md](requirements-review.md).
 
-- **TCND-C04** — the user flow does not include `title`, while the executable create contract requires it;
-- **TCND-C05 / TCND-P01 / TCND-P03** — the documentation says payment may be applicable or not applicable, but does not define the item-type mapping;
-- **TCND-AR05** — the current rule clearly forbids reopening archived cases, so that is testable; however, the product documentation does not define a user recovery path or business rationale for accidental archive.
+## Analysis Conclusion
 
-## Analysis Result
+Most lifecycle conditions have a defined test oracle and are ready for test design.
 
-The lifecycle is sufficiently defined to proceed to test design for most conditions.
-
-Open documentation findings do not block all lifecycle testing. They block only the expected-result decisions that depend on the missing or contradictory requirement.
-
-The next activity is **Test Design**: convert these test conditions into concrete scenarios, select test data and apply the techniques defined in the Test Approach.
+Open documentation findings affect only the conditions that depend on the missing or contradictory requirement.
