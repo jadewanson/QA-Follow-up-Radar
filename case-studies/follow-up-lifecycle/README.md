@@ -64,13 +64,13 @@ That makes it a better employer-facing sample than an isolated form validation e
 - requirements contradiction and ambiguity analysis;
 - lifecycle test-condition analysis;
 - risk analysis;
-- preliminary test design;
+- manual test design with state-transition coverage;
 - static implementation cross-check.
 
 ### Not claimed as completed yet
 
 - browser execution against a running build;
-- Postman collection execution;
+- manual API execution where required;
 - direct PostgreSQL validation;
 - DevTools evidence;
 - runtime bug reproduction.
