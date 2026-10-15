@@ -40,6 +40,8 @@ This is a coverage scope, not one mandatory linear path. Allowed and forbidden t
 
 The two initial failures exposed one High-priority defect, **FUT-13 — Reopening a completed case does not re-arm the canceled reminder**. The defect was fixed, successfully retested across Done and Lost reopen paths, and closed. The targeted regression passed.
 
+The repository now includes portable Jira and Zephyr result snapshots so the execution history and defect lifecycle can be reviewed without access to the private test-management workspace.
+
 One residual environment limitation remains: automatic reminder dispatch at the configured due time could not be verified in the current local Docker Compose environment.
 
 ## Project Artifacts
@@ -62,6 +64,10 @@ One residual environment limitation remains: automatic reminder dispatch at the 
 ### 04 — Execution
 
 - [Test Execution Summary](04-execution/test-execution-summary.md)
+- [Execution Evidence Exports](04-execution/exports/README.md)
+  - [Zephyr execution results](04-execution/exports/zephyr-execution-results.md)
+  - [Zephyr execution results CSV](04-execution/exports/zephyr-execution-results.csv)
+  - [Jira FUT-13 defect export](04-execution/exports/jira-fut-13-defect.md)
 
 ### 05 — Completion
 
