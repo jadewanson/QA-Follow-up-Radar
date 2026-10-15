@@ -3,24 +3,21 @@
 ## IO-01 — Whitespace-only required strings may normalize to empty
 
 **Type:** Static implementation observation  
-**Status:** Dynamic confirmation required  
+**Status:** Dynamically checked — no product defect confirmed  
 **Area:** Create
 
 ### Supporting observation
 
-The current create schema validates `title` and `client_name` with a minimum raw length before the service normalizes these values using `.strip()`.
+The reviewed create schema validates `title` and `client_name` before the service normalizes these values using `.strip()`.
 
-A whitespace-only value may therefore satisfy raw length validation and then normalize to an empty string before persistence.
+This created a testability concern that whitespace-only required values might normalize to empty before persistence.
 
-### Manual confirmation required
+### Dynamic result
 
-Execute the negative creation scenarios against the running web product:
+The negative required-field behaviour was covered during **TC-03 — Reject invalid required creation data** in the completed manual execution cycle.
 
-- whitespace-only Title;
-- whitespace-only Client name.
-
-Observe whether the case is rejected or created.
+The invalid creation attempts were rejected and no invalid case was persisted. No runtime product defect was raised from IO-01.
 
 ### Classification
 
-This is not a confirmed product defect until the behaviour is reproduced dynamically and compared with a sufficiently defined expected result.
+IO-01 is retained as an implementation-review observation that informed negative test design. It is not an open defect or unresolved execution item.
