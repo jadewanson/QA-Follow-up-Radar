@@ -229,7 +229,7 @@ Manual API checks may be used where the current web UI does not expose the requi
 
 ---
 
-### TC-09 — Do not allow Mark Paid when payment is not applicable
+### TC-09 — Prevent Mark Paid when payment is not applicable
 
 **Priority:** P0  
 **Technique:** Decision Table Testing, negative testing  
@@ -332,7 +332,7 @@ Manual API checks may be used where the current web UI does not expose the requi
 
 ---
 
-### TC-13 — Reject terminal lifecycle mutations
+### TC-13 — Reject lifecycle mutations after completion
 
 **Priority:** P0  
 **Technique:** State Transition Testing, negative testing  
