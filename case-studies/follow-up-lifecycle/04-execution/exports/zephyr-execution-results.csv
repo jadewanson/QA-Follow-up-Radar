@@ -1,0 +1,29 @@
+cycle,zephyr_key,test_case,result
+FUT-R1,FUT-T1,"TC-01 — Create a valid invoice with a future due date",Pass
+FUT-R1,FUT-T2,"TC-02 — Project active state across the UTC date boundary",Pass
+FUT-R1,FUT-T3,"TC-03 — Reject invalid required creation data",Pass
+FUT-R1,FUT-T4,"TC-04 — Deliver reminder and provide return path",Blocked
+FUT-R1,FUT-T5,"TC-05 — Reschedule an overdue case to a future date",Pass
+FUT-R1,FUT-T6,"TC-06 — Reschedule between active temporal states",Pass
+FUT-R1,FUT-T7,"TC-07 — Prevent rescheduling a completed case",Pass
+FUT-R1,FUT-T8,"TC-08 — Mark a mutable payment-applicable case as paid",Pass
+FUT-R1,FUT-T9,"TC-09 — Prevent Mark Paid when payment is not applicable",Pass
+FUT-R1,FUT-T10,"TC-10 — Complete an active case as Done",Pass
+FUT-R1,FUT-T11,"TC-11 — Complete an active case as Lost",Pass
+FUT-R1,FUT-T12,"TC-12 — Reject completion without an outcome reason",Pass
+FUT-R1,FUT-T13,"TC-13 — Reject lifecycle mutations after completion",Pass
+FUT-R1,FUT-T14,"TC-14 — Reopen a Done case",Fail
+FUT-R1,FUT-T15,"TC-15 — Reopen a Lost case",Fail
+FUT-R1,FUT-T16,"TC-16 — Reopen control is unavailable for active cases",Pass
+FUT-R1,FUT-T17,"TC-17 — Archive a non-archived case",Pass
+FUT-R1,FUT-T18,"TC-18 — Reject repeated Archive and Reopen from Archived",Pass
+FUT-R1,FUT-T19,"TC-19 — Terminal states remain terminal when due date becomes past",Pass
+FUT-R1,FUT-T20,"TC-20 — Lifecycle activity remains traceable after manual actions",Pass
+FUT-R2,FUT-T14,"TC-14 — Reopen a Done case",Pass
+FUT-R2,FUT-T15,"TC-15 — Reopen a Lost case",Pass
+FUT-R3,FUT-T5,"TC-05 — Reschedule an overdue case to a future date",Pass
+FUT-R3,FUT-T10,"TC-10 — Complete an active case as Done",Pass
+FUT-R3,FUT-T11,"TC-11 — Complete an active case as Lost",Pass
+FUT-R3,FUT-T13,"TC-13 — Reject lifecycle mutations after completion",Pass
+FUT-R3,FUT-T16,"TC-16 — Reopen control is unavailable for active cases",Pass
+FUT-R3,FUT-T17,"TC-17 — Archive a non-archived case",Pass
