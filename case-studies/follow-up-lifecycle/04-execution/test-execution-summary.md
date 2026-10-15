@@ -20,6 +20,14 @@ Execution was performed in Zephyr using the approved manual test cases. The prim
 - Jira for defect tracking
 - Zephyr Advanced for test execution
 
+## Portable Evidence Exports
+
+- [Zephyr execution results](exports/zephyr-execution-results.md)
+- [Zephyr execution results CSV](exports/zephyr-execution-results.csv)
+- [Jira FUT-13 defect export](exports/jira-fut-13-defect.md)
+
+These repository snapshots make the completed execution and defect evidence reviewable without access to the private Jira/Zephyr workspace.
+
 ## Cycle Results
 
 | Cycle | Purpose | Executed | Pass | Fail | Blocked | Status |
@@ -71,6 +79,15 @@ FUT-13 was then marked **Done**.
 ## Targeted Regression Result
 
 A targeted regression cycle was executed after the FUT-13 fix to check adjacent lifecycle and reminder behaviour that could have been affected by the change.
+
+Selected regression coverage:
+
+- TC-05 — Reschedule an overdue case to a future date
+- TC-10 — Complete an active case as Done
+- TC-11 — Complete an active case as Lost
+- TC-13 — Reject lifecycle mutations after completion
+- TC-16 — Reopen control is unavailable for active cases
+- TC-17 — Archive a non-archived case
 
 **FUT-R3 result: 6 Pass / 0 Fail / 0 Blocked.**
 
