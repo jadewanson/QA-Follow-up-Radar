@@ -24,11 +24,23 @@ This is a coverage scope, not one mandatory linear path. Allowed and forbidden t
 | Requirements review | Complete |
 | Test analysis | Complete |
 | Test design | Complete |
-| Zephyr test implementation | Pending |
-| Manual execution | Pending |
-| Defect reporting | Pending |
-| Retest / regression | Pending |
-| Test completion report | Pending |
+| Zephyr test implementation | Complete |
+| Manual execution | Complete |
+| Defect reporting | Complete |
+| Retest / regression | Complete |
+| Test completion report | Complete |
+
+## Execution Outcome
+
+| Cycle | Purpose | Result |
+|---|---|---|
+| FUT-R1 | Initial manual system test | 20 executed — 17 Pass / 2 Fail / 1 Blocked |
+| FUT-R2 | FUT-13 retest | 2 executed — 2 Pass |
+| FUT-R3 | Targeted regression | 6 executed — 6 Pass |
+
+The two initial failures exposed one High-priority defect, **FUT-13 — Reopening a completed case does not re-arm the canceled reminder**. The defect was fixed, successfully retested across Done and Lost reopen paths, and closed. The targeted regression passed.
+
+One residual environment limitation remains: automatic reminder dispatch at the configured due time could not be verified in the current local Docker Compose environment.
 
 ## Project Artifacts
 
@@ -47,7 +59,15 @@ This is a coverage scope, not one mandatory linear path. Allowed and forbidden t
 - [State Transition Matrix](03-design/state-transition-matrix.md)
 - [Manual Test Cases](03-design/test-cases.md)
 
-The current `test-cases.md` is the design source pending implementation in Zephyr. After the cases are entered into Zephyr, Zephyr becomes the source of truth for manual test cases and execution status.
+### 04 — Execution
+
+- [Test Execution Summary](04-execution/test-execution-summary.md)
+
+### 05 — Completion
+
+- [Test Completion Report](05-completion/test-completion-report.md)
+
+The Markdown test-case set is retained as the design artifact. Zephyr is the source of truth for the implemented manual test cases and execution statuses.
 
 ## Test Basis
 
@@ -71,6 +91,6 @@ Browser DevTools, manual API requests and read-only persisted-state checks may b
 
 ## Evidence Policy
 
-No runtime Pass / Fail claim is made before execution.
+Runtime Pass / Fail / Blocked claims are based on completed manual executions in Zephyr.
 
-Requirements/documentation findings are kept separate from confirmed product defects. Static implementation observations remain candidates until reproduced against the running product.
+Requirements/documentation findings are kept separate from confirmed product defects. Product defects are reported only when observed behaviour contradicts a sufficiently defined expected result.
