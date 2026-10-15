@@ -16,6 +16,8 @@ Scope:
 
 [Review Jira & Zephyr execution evidence](case-studies/follow-up-lifecycle/04-execution/exports/README.md)
 
+[View visual execution evidence](case-studies/follow-up-lifecycle/04-execution/evidence/README.md)
+
 ## Completed QA Flow
 
 - Planning — complete
@@ -41,7 +43,7 @@ Scope:
 
 ## Working Model
 
-- **GitHub** — planning, analysis, test-design, portable Jira/Zephyr evidence exports, execution-summary and completion artifacts
+- **GitHub** — planning, analysis, test-design, portable Jira/Zephyr exports, visual execution evidence, execution-summary and completion artifacts
 - **Zephyr Advanced** — manual test cases, test cycles and execution statuses
 - **Jira** — defect tracking and related QA work
 - **Postman / browser tools** — supporting manual API and runtime verification

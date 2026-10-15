@@ -44,6 +44,17 @@ The repository now includes portable Jira and Zephyr result snapshots so the exe
 
 One residual environment limitation remains: automatic reminder dispatch at the configured due time could not be verified in the current local Docker Compose environment.
 
+## Visual Evidence
+
+Selected screenshots provide a compact review of the execution environment and QA workflow:
+
+- **Docker** — local Docker Compose QA environment with PostgreSQL, API, web and Redis services running, plus a successful backend health check.
+- **Zephyr Advanced** — 20 approved manual test cases organized by Follow-Up Item lifecycle area.
+- **Jira** — QA work tracked through completion, including the lifecycle scope, completion activity and closed FUT-13 defect.
+- **Postman** — manual API state verification used as supporting evidence during system testing.
+
+[Open the visual evidence gallery](04-execution/evidence/README.md)
+
 ## Project Artifacts
 
 ### 01 — Planning
@@ -64,6 +75,7 @@ One residual environment limitation remains: automatic reminder dispatch at the 
 ### 04 — Execution
 
 - [Test Execution Summary](04-execution/test-execution-summary.md)
+- [Visual Execution Evidence](04-execution/evidence/README.md)
 - [Execution Evidence Exports](04-execution/exports/README.md)
   - [Zephyr execution results](04-execution/exports/zephyr-execution-results.md)
   - [Zephyr execution results CSV](04-execution/exports/zephyr-execution-results.csv)
