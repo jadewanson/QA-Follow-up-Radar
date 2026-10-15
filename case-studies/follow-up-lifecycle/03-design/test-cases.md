@@ -57,9 +57,11 @@ Manual API checks may be used where the current web UI does not expose the requi
 - Due date after current UTC date.
 
 **Steps**
-1. Create or reschedule one active case for each test-data value.
-2. Return to the dashboard.
-3. Observe each case status and board section.
+1. Create one active case with a past due date.
+2. Create a separate active case with a due date on the current UTC date.
+3. Create a separate active case with a future due date.
+4. Return to the dashboard.
+5. Observe each case status and board section.
 
 **Expected result**
 - Past UTC date → `overdue`.
@@ -315,10 +317,9 @@ Manual API checks may be used where the current web UI does not expose the requi
 
 **Test data**
 - Empty reason.
-- Whitespace-only reason.
 
 **Steps**
-1. Leave Outcome reason empty or enter only whitespace.
+1. Leave Outcome reason empty.
 2. Click **Mark done**.
 3. Repeat for **Mark lost**.
 4. Observe the case state.
@@ -512,8 +513,8 @@ Manual API checks may be used where the current web UI does not expose the requi
 
 ## Design Notes
 
-- These cases are intended for manual execution and are the current design source pending implementation in Zephyr.
+- These cases are the retained manual test-design baseline for the completed lifecycle cycle.
 - Test results are not recorded in this file.
-- After implementation, Zephyr becomes the source of truth for manual test cases and Pass / Fail / Blocked execution status.
+- The cases were implemented in Zephyr; Zephyr is the source of truth for manual test case versions and Pass / Fail / Blocked execution status.
 - Archive coverage uses manual API execution because the current web UI implementation does not expose an Archive action.
 - Requirement gaps remain tracked separately and are not silently converted into expected product behaviour.
