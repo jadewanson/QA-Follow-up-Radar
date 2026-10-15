@@ -34,11 +34,12 @@ Scope:
 - **1 High-priority product defect** reported from the failed reopen/reminder path
 - Defect fixed and verified through a dedicated **2-case retest cycle**
 - **6-case targeted regression** completed with all tests passing
+- Portable Jira and Zephyr execution exports included in the repository
 - One residual environment risk documented for automatic scheduled reminder dispatch
 
 ## Working Model
 
-- **GitHub** — planning, analysis, test-design, execution-summary and completion artifacts
+- **GitHub** — planning, analysis, test-design, portable Jira/Zephyr evidence exports, execution-summary and completion artifacts
 - **Zephyr Advanced** — manual test cases, test cycles and execution statuses
 - **Jira** — defect tracking and related QA work
 - **Postman / browser tools** — supporting manual API and runtime verification
