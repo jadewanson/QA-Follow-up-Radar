@@ -57,6 +57,16 @@ No automated test implementation was included in this QA scope.
 
 Execution period: **14–15 October 2026**.
 
+### Portable evidence
+
+The portfolio repository contains static exports of the completed operational records:
+
+- [Zephyr execution results](../04-execution/exports/zephyr-execution-results.md)
+- [Zephyr execution results CSV](../04-execution/exports/zephyr-execution-results.csv)
+- [Jira FUT-13 defect export](../04-execution/exports/jira-fut-13-defect.md)
+
+The live Jira and Zephyr records remain the operational source of truth.
+
 ## 5. Execution Summary
 
 ### Initial system test — FUT-R1
@@ -94,6 +104,15 @@ The blocked execution was:
 ### Targeted regression — FUT-R3
 
 **FUT-13 Targeted Regression — Cycle 03**
+
+Selected cases:
+
+- TC-05 — Reschedule an overdue case to a future date
+- TC-10 — Complete an active case as Done
+- TC-11 — Complete an active case as Lost
+- TC-13 — Reject lifecycle mutations after completion
+- TC-16 — Reopen control is unavailable for active cases
+- TC-17 — Archive a non-archived case
 
 | Result | Count |
 |---|---:|
