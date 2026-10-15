@@ -14,6 +14,8 @@ Scope:
 
 [Open the case study](case-studies/follow-up-lifecycle/README.md)
 
+[Review Jira & Zephyr execution evidence](case-studies/follow-up-lifecycle/04-execution/exports/README.md)
+
 ## Completed QA Flow
 
 - Planning — complete
